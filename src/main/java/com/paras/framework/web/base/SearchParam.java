@@ -4,7 +4,7 @@ package com.paras.framework.web.base;
  * Class to model a search operations' basic parameters.
  * @author Paras.
  */
-public class SearchParam {
+public abstract class SearchParam {
 	/**
 	 * Current Page of the search result.
 	 */
@@ -35,4 +35,10 @@ public class SearchParam {
 		this.currentPage = currentPage;
 		this.pageSize = pageSize;
 	}
+	
+	/**
+	 * To check is search param is empty.
+	 * @return
+	 */
+	public abstract boolean isEmpty();
 }

@@ -1,5 +1,11 @@
 package com.paras.framework.web.base;
 
+import java.io.IOException;
+
+import com.fasterxml.jackson.core.JsonGenerationException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 /**
  * Model to represent a outcome of API call.
  * 
@@ -59,5 +65,19 @@ public class Response {
 
 	public void setData(Object data) {
 		this.data = data;
+	}
+	
+	public String toJSON() {
+
+		try{
+			ObjectMapper mapper = new ObjectMapper();
+			return mapper.writeValueAsString( this );
+		}catch( JsonGenerationException ex ) {
+			return null;
+		}catch( JsonMappingException ex ) {
+			return null;
+		}catch( IOException ex ) {
+			return null;
+		}		
 	}
 }
