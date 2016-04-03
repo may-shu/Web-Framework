@@ -39,6 +39,8 @@ public class HTML5EnablerFilter implements Filter {
 		HttpServletRequest httpRequest = ( HttpServletRequest ) request;
         HttpServletResponse httpResponse = ( HttpServletResponse ) response;
         
+        System.out.println( httpRequest.getRequestURL());
+        System.out.println( httpRequest.getRequestURI());
         String requestedURL = httpRequest.getRequestURI().replace( httpRequest.getContextPath(), "" );
         
         if( requestedURL.equals( ROOT )) {
@@ -52,7 +54,7 @@ public class HTML5EnablerFilter implements Filter {
         } else if( requestedURL.indexOf( RESOURCES ) == 0 ) {
         	chain.doFilter( request, response); 
         } else {
-        	String newURL = httpRequest.getContextPath() + "?path=" + new String( Base64.encode( requestedURL.getBytes() ));
+        	String newURL = "/?path=" + new String( Base64.encode( requestedURL.getBytes() ));
         	LOGGER.info( "In HTML5ModeEnableFilter | Found request for deeplinking " + requestedURL + " | Redirected to " + newURL );
         	httpResponse.sendRedirect( newURL );
         }
