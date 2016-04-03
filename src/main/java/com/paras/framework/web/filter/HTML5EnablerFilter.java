@@ -39,8 +39,6 @@ public class HTML5EnablerFilter implements Filter {
 		HttpServletRequest httpRequest = ( HttpServletRequest ) request;
         HttpServletResponse httpResponse = ( HttpServletResponse ) response;
         
-        System.out.println( httpRequest.getRequestURL());
-        System.out.println( httpRequest.getRequestURI());
         String requestedURL = httpRequest.getRequestURI().replace( httpRequest.getContextPath(), "" );
         
         if( requestedURL.equals( ROOT )) {
