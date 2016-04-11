@@ -5,7 +5,7 @@ package com.paras.framework.web.exception;
  * 
  * @author Paras
  */ 
-public class InvalidCredentialsException extends Exception {
+public class InvalidCredentialsException extends LoginException {
 
 	/**
 	 * 
