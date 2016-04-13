@@ -1,5 +1,8 @@
 package com.paras.framework.web.base;
 
+import org.apache.commons.lang3.StringUtils;
+
+
 /**
  * Class to model a search operations' basic parameters.
  * @author Paras.
@@ -8,12 +11,18 @@ public abstract class SearchParam {
 	/**
 	 * Current Page of the search result.
 	 */
-	private int currentPage;
+	protected int currentPage;
 	
 	/**
 	 * Number of results in page.
 	 */
-	private int pageSize;
+	protected int pageSize;
+	
+	/**
+	 * Text to enable omni search.
+	 */
+	protected String text;
+	
 	public int getCurrentPage() {
 		return currentPage;
 	}
@@ -25,6 +34,12 @@ public abstract class SearchParam {
 	}
 	public void setPageSize(int pageSize) {
 		this.pageSize = pageSize;
+	}	
+	public String getText() {
+		return text;
+	}
+	public void setText(String text) {
+		this.text = text;
 	}
 	
 	public SearchParam() {
@@ -41,4 +56,22 @@ public abstract class SearchParam {
 	 * @return
 	 */
 	public abstract boolean isEmpty();
+	
+	/**
+	 * To check if search is simple.
+	 */
+	public boolean isSimpleSearch() {
+		if( isEmpty() ) {
+			return false;
+		} else {
+			
+			return StringUtils.isNotBlank( text );
+			
+		}
+	}
+	
+	/**
+	 * To check if search is advanced.
+	 */
+	public abstract boolean isAdvancedSearch();
 }
