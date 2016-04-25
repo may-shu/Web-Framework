@@ -2,6 +2,9 @@ package com.paras.framework.web.base;
 
 import java.io.IOException;
 
+import org.apache.log4j.Logger;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.core.JsonGenerationException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -15,6 +18,9 @@ public class Response {
 	
 	protected static String Y = "Y";
 	protected static String MESSAGE = "Ok.";
+	
+	@JsonIgnore
+	private static Logger LOGGER = Logger.getLogger( Response.class );
 	
 	/** 
 	 * Flag to represent success or failure of the call.
@@ -40,6 +46,12 @@ public class Response {
 	public Response( String flag, String message, Object data ) {
 		this.flag = flag;
 		this.message = message;
+		this.data = data;
+	}
+	
+	public Response( Object data ) {
+		this.flag = Y;
+		this.message = MESSAGE;
 		this.data = data;
 	}
 
@@ -70,14 +82,25 @@ public class Response {
 	public String toJSON() {
 
 		try{
+			
 			ObjectMapper mapper = new ObjectMapper();
 			return mapper.writeValueAsString( this );
+			
 		}catch( JsonGenerationException ex ) {
+			
+			LOGGER.error( ex.getMessage() );
 			return null;
+			
 		}catch( JsonMappingException ex ) {
+			
+			LOGGER.error( ex.getMessage() );
 			return null;
+			
 		}catch( IOException ex ) {
+			
+			LOGGER.error( ex.getMessage() );
 			return null;
+			
 		}		
 	}
 }
