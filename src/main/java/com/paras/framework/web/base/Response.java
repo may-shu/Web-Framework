@@ -18,6 +18,7 @@ public class Response {
 	
 	protected static String Y = "Y";
 	protected static String MESSAGE = "Ok.";
+	protected static String N = "N";
 	
 	@JsonIgnore
 	private static Logger LOGGER = Logger.getLogger( Response.class );
