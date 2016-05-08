@@ -23,7 +23,7 @@ public class IntelligentLogger extends Logger{
 	/**
 	 * Utility String to be used in creating 'Caught Exception in ' log.
 	 */
-	private static final String EXCEPTION = " Caught Exception in ";
+	private static final String EXCEPTION = " Caught Exception ";
 
 	/**
 	 * String that identifies source file of log.
@@ -83,6 +83,18 @@ public class IntelligentLogger extends Logger{
 	}
 	
 	/**
+	 * Log a message at debug level.
+	 * Message will be prefixed by method name, then class name.
+	 * 
+	 * @param method Name of the method.
+	 * @param message Message to be logged.
+	 */
+	public void debug( String method, String message ) {
+		log( Level.DEBUG, addMethodInformation( method,  message ));
+	}
+	
+	
+	/**
 	 * Utility method that prints that a method execution has just started.
 	 * @param method Name of the method.
 	 */
@@ -104,7 +116,7 @@ public class IntelligentLogger extends Logger{
 	 * @param ex Exception generated.
 	 */
 	public void error( String method, Exception ex ) {
-		log( Level.ERROR, EXCEPTION + method + " | " + ex.getMessage() );
+		log( Level.ERROR, EXCEPTION + ex.getClass().getName() + " in "+ method + " | " + ex.getMessage() );
 	}
 	
 	/**
